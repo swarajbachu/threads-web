@@ -91,6 +91,7 @@ const threadPost: React.FC = () => {
       <Button
         className="my-2 w-52 self-end bg-black"
         size="md"
+        disabled={isLoading}
         onClick={() => {
           void handlePost();
         }}
