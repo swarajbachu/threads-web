@@ -47,12 +47,12 @@ export const threadsLogin = createTRPCRouter({
         for (let i = 1; i < input.threads.length; i++) {
           const thread = input.threads[i];
           if (thread) {
-            const thread=  await threadsAPI.publish({
-              text: "2nd post",
+            const threadId =  await threadsAPI.publish({
+              text: thread.text,
               parentPostID: previousThreadId,
             });
-            if(thread){
-              previousThreadId = thread
+            if(threadId){
+              previousThreadId = threadId
             }else{
               console.log("error")
               return

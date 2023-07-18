@@ -63,8 +63,8 @@ const threadPost: React.FC = () => {
     const username = localStorage.getItem("username");
     const token = localStorage.getItem("token");
     if(token && username){
-      post({username,token,threads}).then(()=>{
-        if(status === "success"){
+      post({username,token,threads}).then((status)=>{
+        if(status && status.success){
           toast.success("Posted successfully")
           reset();
       }

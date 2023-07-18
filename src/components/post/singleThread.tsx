@@ -16,7 +16,7 @@ const SingleThread: React.FC<SinglethreadProps> = ({
   onAdd
 }) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const [count, setCount] = React.useState(280);
+  const [count, setCount] = React.useState(500);
 
 
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
