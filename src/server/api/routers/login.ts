@@ -37,31 +37,30 @@ export const threadsLogin = createTRPCRouter({
       });
 
       if (input.threads[0] && input.threads.length > 0) {
-      const FirstPost = await threadsAPI.publish({
-        text: input.threads[0].text,
-      });
-      const postId = FirstPost;
+        const FirstPost = await threadsAPI.publish({
+          text: input.threads[0].text,
+        });
+        const postId = FirstPost;
 
-      if(postId){
-
-        let previousThreadId = postId;
-        for (let i = 1; i < input.threads.length; i++) {
-          const thread = input.threads[i];
-          if (thread) {
-            const threadId =  await threadsAPI.publish({
-              text: thread.text,
-              parentPostID: previousThreadId,
-            });
-            if(threadId){
-              previousThreadId = threadId
-            }else{
-              console.log("error")
-              return
+        if (postId) {
+          let previousThreadId = postId;
+          for (let i = 1; i < input.threads.length; i++) {
+            const thread = input.threads[i];
+            if (thread) {
+              const threadId = await threadsAPI.publish({
+                text: thread.text,
+                parentPostID: previousThreadId,
+              });
+              if (threadId) {
+                previousThreadId = threadId;
+              } else {
+                console.log("error");
+                return;
+              }
             }
           }
         }
       }
-    }
-    return { success: true };
+      return { success: true, message: "success",code:200 };
     }),
 });
