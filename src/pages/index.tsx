@@ -11,8 +11,7 @@ export default function Home() {
   const { mutateAsync: post } = api.threadslogin.post.useMutation();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [localUsername, setLocalUsername] = useState('');
-  const [localPassword, setLocalPassword] = useState('');
+
 
   const onsubmit = () => {
     mutateAsync({ username, password }).then(() => {
@@ -30,15 +29,15 @@ export default function Home() {
   useEffect(() => {
     const storedUsername = localStorage.getItem('username');
     if (storedUsername) {
-      setLocalUsername(storedUsername);
+      setUsername(storedUsername);
     }
   }, []);
 
 
 
   if (typeof window !== 'undefined') {
-  const localPassword = localStorage.getItem("password");
-  const localUsername = localStorage.getItem("username");
+  const password = localStorage.getItem("password");
+  const username = localStorage.getItem("username");
   }
 
   return (
@@ -57,7 +56,7 @@ export default function Home() {
             }}
             type="text"
             placeholder="username"
-            value={localUsername}
+            value={username}
             className="rounded-md border py-2 px-3"
           />
           <input
@@ -66,7 +65,7 @@ export default function Home() {
             }}
             type="password"
             placeholder="password"
-            value={localPassword}
+            value={password}
             className="rounded-md border py-2 px-3"
           />
           <Button className="bg-black" onClick={()=>onsubmit}>
