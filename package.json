@@ -9,17 +9,22 @@
     "start": "next start"
   },
   "dependencies": {
+    "@material-tailwind/react": "^2.0.6",
     "@t3-oss/env-nextjs": "^0.3.1",
     "@tanstack/react-query": "^4.29.7",
     "@trpc/client": "^10.26.0",
     "@trpc/next": "^10.26.0",
     "@trpc/react-query": "^10.26.0",
     "@trpc/server": "^10.26.0",
+    "fs": "^0.0.1-security",
     "next": "^13.4.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hot-toast": "^2.4.1",
     "superjson": "1.12.2",
-    "zod": "^3.21.4"
+    "threads-api": "^1.5.1",
+    "zod": "^3.21.4",
+    "zustand": "^4.3.9"
   },
   "devDependencies": {
     "@types/eslint": "^8.37.0",
