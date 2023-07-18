@@ -5,10 +5,10 @@ import TweetPost from "@/components/post/thread";
 import { PageLayout } from "@/components/layout";
 import { Button } from "@material-tailwind/react";
 import Header from "@/components/header";
+import Loading from "@/components/loading";
 
 export default function Home() {
-  const { mutateAsync, data } = api.threadslogin.login.useMutation();
-  const { mutateAsync: post } = api.threadslogin.post.useMutation();
+  const { mutateAsync, data, isLoading } = api.threadslogin.login.useMutation();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -68,8 +68,8 @@ export default function Home() {
             value={password}
             className="rounded-md border py-2 px-3"
           />
-          <Button className="bg-black" onClick={()=>onsubmit}>
-            Login
+          <Button className="bg-black" onClick={onsubmit}>
+            {isLoading ? <Loading/> : "Login"}
           </Button>
         </div>
         <TweetPost />
