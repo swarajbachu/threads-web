@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useRef } from "react";
 
-type SingleTweetProps = {
+type SinglethreadProps = {
   id: number;
   text: string;
   onChange: (id: number, text: string) => void;
@@ -8,7 +8,7 @@ type SingleTweetProps = {
   onAdd: (id: number) => void;
 };
 
-const SingleTweet: React.FC<SingleTweetProps> = ({
+const SingleThread: React.FC<SinglethreadProps> = ({
   id,
   text,
   onChange,
@@ -67,4 +67,4 @@ const SingleTweet: React.FC<SingleTweetProps> = ({
   );
 };
 
-export default SingleTweet;
+export default SingleThread;

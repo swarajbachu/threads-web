@@ -1,28 +1,28 @@
 // store.ts
 import {create} from 'zustand'
 
-type Tweet = {
+type thread = {
     id:number,
     text:string
 }
 
 type StateValues = {
-  tweets: Tweet[];
+  threads: thread[];
 };
 
 type StateSetters = {
-  setTweets: (tweet: Tweet[]) => void;
+  setthreads: (thread: thread[]) => void;
   reset: () => void;
 };
 
 type State = StateValues & StateSetters;
 
 const initialState: StateValues = {
-  tweets: [{ id: 0, text: '' }],
+  threads: [{ id: 0, text: '' }],
 };
 
 export const useStore = create<State>((set) => ({
   ...initialState,
-  setTweets: (tweets) => set((state) => ({ ...state, tweets })),
+  setthreads: (threads) => set((state) => ({ ...state, threads })),
   reset: () => set(() => initialState)
 }));
