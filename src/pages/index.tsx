@@ -12,9 +12,8 @@ export default function Home() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-
-  const onsubmit = () => {
-    mutateAsync({ username, password }).then(() => {
+  const onsubmit = async () => {
+    await mutateAsync({ username, password }).then(() => {
       alert(data?.token);
       if (data) {
         const token = data.token;
@@ -27,18 +26,11 @@ export default function Home() {
   };
 
   useEffect(() => {
-    const storedUsername = localStorage.getItem('username');
+    const storedUsername = localStorage.getItem("username");
     if (storedUsername) {
       setUsername(storedUsername);
     }
   }, []);
-
-
-
-  if (typeof window !== 'undefined') {
-  const password = localStorage.getItem("password");
-  const username = localStorage.getItem("username");
-  }
 
   return (
     <>
@@ -48,8 +40,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <PageLayout>
-        <Header/>
-        <div className="p-4 flex gap-3">
+        <Header />
+        <div className="flex gap-3 p-4">
           <input
             onChange={(e) => {
               setUsername(e.target.value);
@@ -57,7 +49,7 @@ export default function Home() {
             type="text"
             placeholder="username"
             value={username}
-            className="rounded-md border py-2 px-3"
+            className="rounded-md border px-3 py-2"
           />
           <input
             onChange={(e) => {
@@ -66,10 +58,15 @@ export default function Home() {
             type="password"
             placeholder="password"
             value={password}
-            className="rounded-md border py-2 px-3"
+            className="rounded-md border px-3 py-2"
           />
-          <Button className="bg-black" onClick={onsubmit}>
-            {isLoading ? <Loading/> : "Login"}
+          <Button
+            className="bg-black"
+            onClick={() => {
+              void onsubmit();
+            }}
+          >
+            {isLoading ? <Loading /> : "Login"}
           </Button>
         </div>
         <TweetPost />

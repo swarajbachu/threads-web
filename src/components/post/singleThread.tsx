@@ -1,6 +1,6 @@
-import React, { ChangeEvent, useRef } from "react";
+import React, { type ChangeEvent, useRef } from "react";
 
-type SinglethreadProps = {
+interface SinglethreadProps {
   id: number;
   text: string;
   onChange: (id: number, text: string) => void;

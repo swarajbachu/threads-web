@@ -35,6 +35,7 @@ export const threadsLogin = createTRPCRouter({
         token: input.token,
         username: input.username,
       });
+
       if (input.threads[0] && input.threads.length > 0) {
       const FirstPost = await threadsAPI.publish({
         text: input.threads[0].text,

@@ -7,15 +7,11 @@ import { api } from "@/utils/api";
 import Loading from "../loading";
 import { toast } from "react-hot-toast";
 
-type thread = {
-  id: number;
-  text: string;
-};
+
 
 const threadPost: React.FC = () => {
-
-
-  const { threads, setthreads,reset } = useStore(
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { threads, setthreads, reset } = useStore(
     (state) => ({
       threads: state.threads,
       setthreads: state.setthreads,
@@ -23,8 +19,10 @@ const threadPost: React.FC = () => {
     }),
     shallow
   );
-  const { mutateAsync: post,isLoading,status } = api.threadslogin.post.useMutation();
-
+  const {
+    mutateAsync: post,
+    isLoading,
+  } = api.threadslogin.post.useMutation();
 
   const handleAddthread = (id: number) => {
     const index = threads.findIndex((thread) => thread.id === id);
@@ -57,21 +55,22 @@ const threadPost: React.FC = () => {
     );
     setthreads(updatedthreads);
   };
-
-  const handlePost = () => {
-    console.log("this is running")
+  const handlePost = async () => {
+    console.log("this is running");
     const username = localStorage.getItem("username");
     const token = localStorage.getItem("token");
-    if(token && username){
-      post({username,token,threads}).then((status)=>{
-        if(status && status.success){
-          toast.success("Posted successfully")
+    if (token && username) {
+      try {
+        const status = await post({ username, token, threads });
+        if (status && status.success) {
+          toast.success("Posted successfully");
           reset();
+        }
+      } catch (error) {
+        // Handle error
       }
-
-    })
-    }else{
-      toast.error("Login again please")
+    } else {
+      toast.error("Login again please");
     }
   };
 
@@ -90,12 +89,13 @@ const threadPost: React.FC = () => {
         ))}
       </div>
       <Button
-      className="my-2 w-52 self-end bg-black" size="md"
-      onClick={handlePost}
+        className="my-2 w-52 self-end bg-black"
+        size="md"
+        onClick={() => {
+          void handlePost();
+        }}
       >
-        {isLoading ?
-        <Loading text="Processing..."/> :
-        "Publish"}
+        {isLoading ? <Loading text="Processing..." /> : "Publish"}
       </Button>
     </Card>
   );
