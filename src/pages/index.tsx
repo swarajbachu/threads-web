@@ -1,10 +1,9 @@
 import Head from "next/head";
-import Link from "next/link";
 import { api } from "@/utils/api";
 import { useState } from "react";
 import TweetPost from "@/components/post/tweet";
-import { toast } from "react-hot-toast";
 import { PageLayout } from "@/components/layout";
+import { Button } from "@material-tailwind/react";
 
 export default function Home() {
   const { mutateAsync, data } = api.threadslogin.login.useMutation();
@@ -33,41 +32,28 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <PageLayout>
-      <TweetPost/>
-      <main className="flex h-screen w-full items-center justify-center gap-2">
-        <input
-          onChange={(e) => {
-            setUsername(e.target.value);
-          }}
-          type="text"
-          placeholder="username"
-          className="rounded-md border"
-        />
-        <input
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-          type="password"
-          placeholder="password"
-          className="rounded-md border"
-        />
-        <button onClick={onsubmit} className="rounded bg-blue-400 px-6 py-3">
-          Submit
-        </button>
-        <button
-          onClick={() => {
-            const token = localStorage.getItem("token");
-            const username = localStorage.getItem("username");
-            if (token && username ) {
-              post({ token,username });
-            }else{
-              toast.error("please login again")
-            }
-          }}
-        >
-          post
-        </button>
-      </main>
+        <div className="p-4 flex gap-3">
+          <input
+            onChange={(e) => {
+              setUsername(e.target.value);
+            }}
+            type="text"
+            placeholder="username"
+            className="rounded-md border py-2 px-3"
+          />
+          <input
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+            type="password"
+            placeholder="password"
+            className="rounded-md border py-2 px-3"
+          />
+          <Button onClick={()=>onsubmit}>
+            Submit
+          </Button>
+        </div>
+        <TweetPost />
       </PageLayout>
     </>
   );

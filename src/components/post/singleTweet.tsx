@@ -1,4 +1,3 @@
-import { Avatar } from "@material-tailwind/react";
 import React, { ChangeEvent, useRef } from "react";
 
 type SingleTweetProps = {
